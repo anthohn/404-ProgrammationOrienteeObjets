@@ -86,7 +86,6 @@
             this.MinimizeBox = false;
             this.Name = "LabelShop";
             this.Text = "LabelShop Basique";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
