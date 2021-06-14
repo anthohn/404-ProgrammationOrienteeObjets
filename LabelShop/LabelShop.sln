@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelShop", "LabelShop\LabelShop.csproj", "{A334061E-55F6-45FC-B89A-91546A3C64FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A334061E-55F6-45FC-B89A-91546A3C64FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A334061E-55F6-45FC-B89A-91546A3C64FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A334061E-55F6-45FC-B89A-91546A3C64FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A334061E-55F6-45FC-B89A-91546A3C64FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37E13795-18F3-4644-88BD-C9F17FA33265}
+	EndGlobalSection
+EndGlobal
