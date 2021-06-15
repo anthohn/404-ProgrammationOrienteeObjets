@@ -1,30 +1,28 @@
 ﻿///ETML
 ///Auteur : Anthony Höhn
 ///Date : 14.06.2021
-///Description : LabelShop Basique, permet de dessiner de plusieurs couleurs dans une grille composée de 32x32 labels 
-///              ainsi qu'un bouton qui efface la grille.
-
+///Description : LabelShop BasiqueN, allows you to draw several colors in a grid made up of 32x32 labels.
+///              as well a button that clears the grid. In addition it allows to make horizontal, vertical and 90 ° rotation of the drawing
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace LabelShop
 {
-    public partial class LabelShop : Form
+    public partial class LabelShopN : Form
     {
-
         //by default dosen't draw (false)
         private bool _isColorSelected = false;
-
 
         /// <summary>
         /// Constant : The number of labels in axe x
         /// </summary>
-        private const int WIDTH = 32;
+        private const int PANEL_WIDTH = 32;
 
-
+        /// <summary>
         /// Constant : The number of labels axe y
-        private const int HEIGHT = 32;
+        /// </summary>
+        private const int PANEL_HEIGHT = 32;
 
         /// <summary>
         /// Constant :  The width of the labels
@@ -37,11 +35,17 @@ namespace LabelShop
         private const int LABEL_HEIGHT_SIZE = 10;
 
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
-        public LabelShop()
+        public LabelShopN()
         {
             InitializeComponent();
+
+            //disabled button
+            btn90.Enabled = false;
+            btnHorizontal.Enabled = false;
+            btnVertical.Enabled = false;
+            btnSaveAs.Enabled = false;
 
             //Color of the comboBox
             ComboBoxColor.Items.Add(Color.Green);
@@ -56,9 +60,9 @@ namespace LabelShop
             ComboBoxColor.SelectedIndex = 0;
 
             //create labels in panel
-            for(int i = 0; i < WIDTH; i++)
+            for (int i = 0; i < PANEL_WIDTH; i++)
             {
-                for (int j = 0; j < HEIGHT; j++)
+                for (int j = 0; j < PANEL_HEIGHT; j++)
                 {
                     Label lbl = new Label();
 
@@ -95,28 +99,87 @@ namespace LabelShop
         }
 
         /// <summary>
-        /// invert drawing
+        /// Invert drawing
         /// </summary>
         /// <param name="sender">object that causes the event</param>
         /// <param name="e">event-related data</param>
         private void MouseClickOnLabel(object sender, EventArgs e)
         {
             _isColorSelected = !_isColorSelected;
+            btn90.Enabled = true;
+            btnHorizontal.Enabled = true;
+            btnVertical.Enabled = true;
+            btnSaveAs.Enabled = true;
         }
 
         /// <summary>
-        /// replace all colors of the labels to white
+        /// Replace all colors of the labels to white
         /// </summary>
         /// <param name="sender">object that causes the event</param>
         /// <param name="e">event-related data</param>
         private void BtnNewGrid_Click(object sender, EventArgs e)
         {
             //browse the table and replace the label by white color
-            foreach (Label lbl in this.pnlContainer.Controls)
+            foreach (Label lbl in pnlContainer.Controls)
             {
                 lbl.BackColor = Color.White;
             }
+
+            //disabled button
+            btn90.Enabled = false;
+            btnHorizontal.Enabled = false;
+            btnVertical.Enabled = false;
+            btnSaveAs.Enabled = false;
         }
 
+        /// <summary>
+        /// Horizontal symmetry of the draw
+        /// </summary>
+        /// <param name="sender">object that causes the event</param>
+        /// <param name="e">event-related data</param>
+        private void btnHorizontal_Click(object sender, EventArgs e)
+        {
+            foreach (Label lbl in pnlContainer.Controls)
+            {
+                lbl.Location = new Point(lbl.Location.X , pnlContainer.Height - lbl.Location.Y - lbl.Height);
+            }
+        }
+
+        /// <summary>
+        /// Vertical symmetry of the draw
+        /// </summary>
+        /// <param name="sender">object that causes the event</param>
+        /// <param name="e">event-related data</param>
+        private void btnVertical_Click(object sender, EventArgs e)
+        {
+            foreach (Label lbl in pnlContainer.Controls)
+            {
+                lbl.Location = new Point(pnlContainer.Width - lbl.Location.X - lbl.Height, lbl.Location.Y);
+            }
+        }
+
+        /// <summary>
+        /// 90° rotation of the draw
+        /// </summary>
+        /// <param name="sender">object that causes the event</param>
+        /// <param name="e">event-related data</param>
+        private void btn90_Click(object sender, EventArgs e)
+        {
+            foreach (Label lbl in pnlContainer.Controls)
+            {
+                lbl.Location = new Point(pnlContainer.Width - lbl.Location.Y - lbl.Height, lbl.Location.X);
+            }
+
+        }
+
+        private void btnSaveAs_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
