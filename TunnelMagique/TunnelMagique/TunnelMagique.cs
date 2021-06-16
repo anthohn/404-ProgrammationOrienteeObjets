@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿///ETML
+///Auteur : Anthony Höhn
+///Date : 14.06.2021
+///Description : Tunnel magique, grid made up of 25x25 labels.
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TunnelMagique
@@ -32,18 +30,26 @@ namespace TunnelMagique
         /// </summary>
         private const int LABEL_HEIGHT_SIZE = 50;
 
+        public int CURSOR_POSITION_X = 100;
+        public int CURSOR_POSITION_Y = 100;
 
 
+        private Point position = new Point(100, 100);
+        Control currentLabel;
 
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public TunnelMagique()
         {
             InitializeComponent();
 
             //create labels in panel
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 5; i++)
             {
 
-                for (int j = 0; j < 2; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     Label lbl = new Label();
 
@@ -52,64 +58,100 @@ namespace TunnelMagique
 
                     lbl.Location = new Point(i * LABEL_WIDTH_SIZE, j * LABEL_HEIGHT_SIZE);
 
-                    lbl.BackColor = Color.Red;
-                    //j--;
-                    //lbl.MouseMove += new MouseEventHandler(MouseMoveOnLabel);
-                    //lbl.MouseClick += new MouseEventHandler(MouseClickOnLabel);
 
-                    pnlContainer.Controls.Add(lbl);
+                    //border labels red
+                    if (lbl.Location.X == 0 || lbl.Location.X == 200 || lbl.Location.Y == 0 || lbl.Location.Y == 200)
+                    {
+                        lbl.BackColor = Color.Red;
+                        lbl.Tag = "Red";
 
+                    }
+
+                    //midle white line
+                    if (lbl.Location.X == 100 || lbl.Location.Y == 100)
+                    {
+                        lbl.BackColor = Color.White;
+
+                    }
+
+                    // Middle Cursor
+                    if (lbl.Location.Y == 100 && lbl.Location.X == 100)
+                    {
+                        lbl.BackColor = Color.Yellow;
+                    }
+                    PnlContainer.Controls.Add(lbl);
                 }
-
             }
+        }
 
-            //create yellow label
-            for (int i = 2; i < 3; i++)
+
+        /// <summary>
+        /// move the yellow point Up
+        /// </summary>
+        /// <param name="sender">object that causes the event</param>
+        /// <param name="e">event-related data</param>
+        private void BtnUp_Click(object sender, EventArgs e)
+        {
+            currentLabel = PnlContainer.GetChildAtPoint(position);
+            if (currentLabel.Location.Y > 0)
             {
-
-                for (int j = 2; j < 3; j++)
-                {
-                    Label lbl = new Label();
-
-                    lbl.Width = LABEL_WIDTH_SIZE;
-                    lbl.Height = LABEL_HEIGHT_SIZE;
-
-                    lbl.Location = new Point(i * LABEL_WIDTH_SIZE, j * LABEL_HEIGHT_SIZE);
-
-                    lbl.BackColor = Color.Yellow;
-
-                    //lbl.MouseMove += new MouseEventHandler(MouseMoveOnLabel);
-                    //lbl.MouseClick += new MouseEventHandler(MouseClickOnLabel);
-
-                    pnlContainer.Controls.Add(lbl);
-
-                }
+                currentLabel.BackColor = Color.White;
+                position.Y -= 50;
+                currentLabel = PnlContainer.GetChildAtPoint(position);
+                currentLabel.BackColor = Color.Yellow;
             }
         }
 
-        private void pnl_Paint(object sender, PaintEventArgs e)
+        /// <summary>
+        /// move the yellow point Right
+        /// </summary>
+        /// <param name="sender">object that causes the event</param>
+        /// <param name="e">event-related data</param>
+        private void BtnRight_Click(object sender, EventArgs e)
         {
-
+            currentLabel = PnlContainer.GetChildAtPoint(position);
+            if (currentLabel.Location.X < 200)
+            {
+                currentLabel.BackColor = Color.White;
+                position.X += 50;
+                currentLabel = PnlContainer.GetChildAtPoint(position);
+                currentLabel.BackColor = Color.Yellow;
+            }
         }
 
-        private void btnUp_Click(object sender, EventArgs e)
+        /// <summary>
+        /// move the yellow point Down
+        /// </summary>
+        /// <param name="sender">object that causes the event</param>6
+        /// <param name="e">event-related data</param>
+        private void BtnDown_Click(object sender, EventArgs e)
         {
-
+            currentLabel = PnlContainer.GetChildAtPoint(position);
+            if (currentLabel.Location.Y < 200)
+            {
+                currentLabel.BackColor = Color.White;
+                position.Y += 50;
+                currentLabel = PnlContainer.GetChildAtPoint(position);
+                currentLabel.BackColor = Color.Yellow;
+            }
         }
 
-        private void btnRight_Click(object sender, EventArgs e)
+        /// <summary>
+        /// move the yellow point Left
+        /// </summary>
+        /// <param name="sender">object that causes the event</param>
+        /// <param name="e">event-related data</param>
+        private void BtnLeft_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnDown_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLeft_Click(object sender, EventArgs e)
-        {
-
+            currentLabel = PnlContainer.GetChildAtPoint(position);
+            if (currentLabel.Location.X > 0)
+            {
+                currentLabel.BackColor = Color.White;
+                position.X -= 50;
+                currentLabel = PnlContainer.GetChildAtPoint(position);
+                currentLabel.BackColor = Color.Yellow;
+            }
         }
     }
 }
