@@ -28,3 +28,13 @@ F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShopN\Labe
 F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShopN\LabelShop\bin\Debug\LabelShop.exe.config
 F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShopN\LabelShop\bin\Debug\LabelShop.exe
 F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShopN\LabelShop\bin\Debug\LabelShop.pdb
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\bin\Debug\LabelShop.exe.config
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\bin\Debug\LabelShop.exe
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\bin\Debug\LabelShop.pdb
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\obj\Debug\LabelShop.csprojAssemblyReference.cache
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\obj\Debug\LabelShop.LabelShop.resources
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\obj\Debug\LabelShop.Properties.Resources.resources
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\obj\Debug\LabelShop.csproj.GenerateResource.cache
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\obj\Debug\LabelShop.csproj.CoreCompileInputs.cache
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\obj\Debug\LabelShop.exe
+F:\ETML\2020-2021\04-modules-ict\404-ProgrammationOrienteeObjets\LabelShop\LabelShop\obj\Debug\LabelShop.pdb
