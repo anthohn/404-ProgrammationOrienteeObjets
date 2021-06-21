@@ -1,25 +1,16 @@
 ﻿///ETML
 ///Auteur : Anthony Höhn
 ///Date : 14.06.2021
-///Description : Tunnel magique, grid made up of 25x25 labels.
+///Description : Tunnel magique, grid made up of 25x25 labels. 
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace TunnelMagique
 {
     public partial class TunnelMagique : Form
     {
-        /// <summary>
-        /// Constant : The number of labels in axe x
-        /// </summary>
-        private const int PANEL_WIDTH = 5;
-
-        /// <summary>
-        /// Constant : The number of labels axe y
-        /// </summary>
-        private const int PANEL_HEIGHT = 5;
-
         /// <summary>
         /// Constant :  The width of the labels
         /// </summary>
@@ -30,11 +21,7 @@ namespace TunnelMagique
         /// </summary>
         private const int LABEL_HEIGHT_SIZE = 50;
 
-        public int CURSOR_POSITION_X = 100;
-        public int CURSOR_POSITION_Y = 100;
-
-
-        private Point position = new Point(100, 100);
+        private Point _position = new Point(100, 100);
         Control currentLabel;
 
 
@@ -58,19 +45,20 @@ namespace TunnelMagique
 
                     lbl.Location = new Point(i * LABEL_WIDTH_SIZE, j * LABEL_HEIGHT_SIZE);
 
-
                     //border labels red
                     if (lbl.Location.X == 0 || lbl.Location.X == 200 || lbl.Location.Y == 0 || lbl.Location.Y == 200)
                     {
                         lbl.BackColor = Color.Red;
                         lbl.Tag = "Red";
-
                     }
 
+                    //lbl.Location.X == 100 || lbl.Location.Y == 100
                     //midle white line
-                    if (lbl.Location.X == 100 || lbl.Location.Y == 100)
+                    if (lbl.Location.X == 100 && lbl.Location.Y == 0 || lbl.Location.X == 200 && lbl.Location.Y == 100 || lbl.Location.X == 0 && lbl.Location.Y == 100 || lbl.Location.X == 100 && lbl.Location.Y == 200)
                     {
                         lbl.BackColor = Color.White;
+                        //lbl.Tag = "White";
+                        lbl.Tag = null;
 
                     }
 
@@ -84,7 +72,6 @@ namespace TunnelMagique
             }
         }
 
-
         /// <summary>
         /// move the yellow point Up
         /// </summary>
@@ -92,12 +79,30 @@ namespace TunnelMagique
         /// <param name="e">event-related data</param>
         private void BtnUp_Click(object sender, EventArgs e)
         {
-            currentLabel = PnlContainer.GetChildAtPoint(position);
-            if (currentLabel.Location.Y > 0)
+            currentLabel = PnlContainer.GetChildAtPoint(_position);
+            if (currentLabel.Location.Y > 0 )
+            {                    
+                currentLabel.BackColor = Color.White;
+                _position.Y -= 50;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
+                currentLabel.BackColor = Color.Yellow;
+                Debug.WriteLine(currentLabel.Tag);                
+            }
+            //Move the yellow point from the top the the bottom
+            else
             {
                 currentLabel.BackColor = Color.White;
-                position.Y -= 50;
-                currentLabel = PnlContainer.GetChildAtPoint(position);
+                _position.Y += 200;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
+                currentLabel.BackColor = Color.Yellow;
+            }
+
+            //if the labels has the "Red" tag- > go back 
+            if ((String)currentLabel.Tag == "Red")
+            {
+                currentLabel.BackColor = Color.Red;
+                _position.Y += 50;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
                 currentLabel.BackColor = Color.Yellow;
             }
         }
@@ -109,12 +114,29 @@ namespace TunnelMagique
         /// <param name="e">event-related data</param>
         private void BtnRight_Click(object sender, EventArgs e)
         {
-            currentLabel = PnlContainer.GetChildAtPoint(position);
+            currentLabel = PnlContainer.GetChildAtPoint(_position);
             if (currentLabel.Location.X < 200)
             {
                 currentLabel.BackColor = Color.White;
-                position.X += 50;
-                currentLabel = PnlContainer.GetChildAtPoint(position);
+                _position.X += 50;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
+                currentLabel.BackColor = Color.Yellow;
+            }
+            //Move the yellow point from the right the the left
+            else
+            {
+                currentLabel.BackColor = Color.White;
+                _position.X = 0;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
+                currentLabel.BackColor = Color.Yellow;
+            }
+
+            //if the labels has the "Red" tag- > go back 
+            if ((String)currentLabel.Tag == "Red")
+            {
+                currentLabel.BackColor = Color.Red;
+                _position.X -= 50;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
                 currentLabel.BackColor = Color.Yellow;
             }
         }
@@ -126,12 +148,29 @@ namespace TunnelMagique
         /// <param name="e">event-related data</param>
         private void BtnDown_Click(object sender, EventArgs e)
         {
-            currentLabel = PnlContainer.GetChildAtPoint(position);
+            currentLabel = PnlContainer.GetChildAtPoint(_position);
             if (currentLabel.Location.Y < 200)
+            {    
+                currentLabel.BackColor = Color.White;
+                _position.Y += 50;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
+                currentLabel.BackColor = Color.Yellow;
+            }
+            //Move the yellow point from the bottom the the top
+            else
             {
                 currentLabel.BackColor = Color.White;
-                position.Y += 50;
-                currentLabel = PnlContainer.GetChildAtPoint(position);
+                _position.Y = 0;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
+                currentLabel.BackColor = Color.Yellow;
+            }
+
+            //if the labels has the "Red" tag- > go back 
+            if ((String)currentLabel.Tag == "Red")
+            {
+                currentLabel.BackColor = Color.Red;
+                _position.Y -= 50;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
                 currentLabel.BackColor = Color.Yellow;
             }
         }
@@ -144,12 +183,30 @@ namespace TunnelMagique
         private void BtnLeft_Click(object sender, EventArgs e)
         {
 
-            currentLabel = PnlContainer.GetChildAtPoint(position);
+            currentLabel = PnlContainer.GetChildAtPoint(_position);
             if (currentLabel.Location.X > 0)
             {
                 currentLabel.BackColor = Color.White;
-                position.X -= 50;
-                currentLabel = PnlContainer.GetChildAtPoint(position);
+                _position.X -= 50;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
+                currentLabel.BackColor = Color.Yellow;
+            }
+
+            //Move the yellow point from the left the the right
+            else
+            {
+                currentLabel.BackColor = Color.White;
+                _position.X += 200;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
+                currentLabel.BackColor = Color.Yellow;
+            }
+
+            //if the labels has the "Red" tag- > go back 
+            if ((String)currentLabel.Tag == "Red")
+            {
+                currentLabel.BackColor = Color.Red;
+                _position.X += 50;
+                currentLabel = PnlContainer.GetChildAtPoint(_position);
                 currentLabel.BackColor = Color.Yellow;
             }
         }
